@@ -1,0 +1,33 @@
+{
+  "app_config": {
+    "value": {
+      "project_name": "my-app",
+      "primary_region": "us-east-1",
+      "dr_region": "us-west-2",
+      "lambda": {
+        "primary": {
+          "function_name": "my-app-primary",
+          "s3_bucket": "my-app-deployments-123456789012-us-east-1",
+          "s3_key": "lambda/function.zip"
+        },
+        "dr": {
+          "function_name": "my-app-dr",
+          "s3_bucket": "my-app-deployments-123456789012-us-west-2",
+          "s3_key": "lambda/function.zip"
+        }
+      },
+      "static_assets": {
+        "s3_bucket": "my-app-static-123456789012"
+      },
+      "cloudfront": {
+        "distribution_id": "E1234567890ABC"
+      },
+      "dynamodb": {
+        "table_name": "my-app-visits"
+      }
+    }
+  },
+  "application_url": {
+    "value": "https://app.example.com"
+  }
+}
