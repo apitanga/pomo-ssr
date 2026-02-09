@@ -46,7 +46,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   echo "❌ Infrastructure config not found: $CONFIG_FILE"
   echo ""
   echo "Setup required:"
-  1. Deploy infrastructure from serverless-ssr-module"
+  echo "  1. Deploy infrastructure from serverless-ssr-module"
   echo "  2. Run: terraform output -json > $CONFIG_FILE"
   exit 1
 fi
@@ -117,4 +117,5 @@ aws cloudfront create-invalidation \
   --paths "/_nuxt/*" "/favicon.ico" "/*.html"
 
 echo "✅ Deployment complete!"
-echo "   URL: $(jq -r '.application_url.value' "../$CONFIG_FILE")"
+APP_URL=$(jq -r '.application_url.value' "$CONFIG_FILE")
+echo "   URL: $APP_URL"
