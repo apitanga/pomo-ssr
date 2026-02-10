@@ -8,7 +8,7 @@ on:
 # Required to update GitHub variables
 permissions:
   contents: read
-  actions: write # Required to update repository variables
+  variables: write  # Required to update repository variables via GITHUB_TOKEN
 
 jobs:
   sync-config:
