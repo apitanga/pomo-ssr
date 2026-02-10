@@ -1,18 +1,19 @@
 name: Sync Infrastructure Config
 
 on:
-  # Manual trigger only — requires TF_API_TOKEN secret to be set in repo settings
-  # (pomo-ssr uses TFC backend; add TF_API_TOKEN secret before enabling push trigger)
+  # Manual trigger only until TF_API_TOKEN secret is added to this repo.
+  # Once added, restore the push trigger:
+  #   push:
+  #     branches: [main]
+  #     paths: ['infra/**/*.tf', 'infra/**/*.tfvars']
   workflow_dispatch:
 
-# Required to update GitHub variables
 permissions:
-  contents: read
-  variables: write  # Required to update repository variables via GITHUB_TOKEN
+  contents: write  # Required to commit infra outputs file
 
 jobs:
   sync-config:
-    name: Update INFRA_OUTPUTS_JSON Variable
+    name: Sync Infra Outputs
     runs-on: ubuntu-latest
 
     steps:
@@ -30,35 +31,17 @@ jobs:
         run: terraform init
 
       - name: Get Infrastructure Outputs
-        id: outputs
         working-directory: infra
         run: |
-          # Get all outputs as JSON
-          terraform output -json > /tmp/infra-outputs.json
+          mkdir -p ../config
+          terraform output -json > ../config/infra-outputs.json
+          echo "📋 Outputs retrieved:"
+          jq 'keys' ../config/infra-outputs.json
 
-          # Show what we got
-          echo "📋 Infrastructure outputs retrieved:"
-          cat /tmp/infra-outputs.json | jq 'keys'
-
-      - name: Update GitHub Variable
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit if changed
         run: |
-          echo "🔄 Updating INFRA_OUTPUTS_JSON variable..."
-
-          # Read JSON and encode for single-line storage
-          INFRA_JSON=$(cat /tmp/infra-outputs.json | jq -c .)
-
-          # Update or create the variable
-          gh variable set INFRA_OUTPUTS_JSON --body "$INFRA_JSON"
-
-          echo "✅ Variable updated successfully!"
-
-      - name: Verify Update
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "✅ INFRA_OUTPUTS_JSON was last updated:"
-          gh variable list | grep INFRA_OUTPUTS_JSON || echo "Variable exists (no timestamp shown)"
-          echo ""
-          echo "🎯 Next deployment will use the latest infrastructure configuration"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add config/infra-outputs.json
+          git diff --staged --quiet && echo "No changes to commit" || \
+            git commit -m "chore: sync infra outputs [skip ci]" && git push

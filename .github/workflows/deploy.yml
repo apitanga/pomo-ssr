@@ -49,8 +49,8 @@ jobs:
             echo "⚠️ AWS OIDC role not configured"
           fi
 
-          # Check if INFRA_OUTPUTS_JSON variable exists
-          if [ -n "${{ vars.INFRA_OUTPUTS_JSON }}" ]; then
+          # Check if infra config is available (committed file takes precedence)
+          if [ -f "config/infra-outputs.json" ] || [ -n "${{ vars.INFRA_OUTPUTS_JSON }}" ]; then
             echo "has_config=true" >> $GITHUB_OUTPUT
             echo "✅ Infrastructure config found"
           else
@@ -93,8 +93,13 @@ jobs:
         env:
           INFRA_CONFIG: ${{ github.workspace }}/config/infra-outputs.json
         run: |
-          echo '${{ vars.INFRA_OUTPUTS_JSON }}' > "$INFRA_CONFIG"
-          echo "✅ Infrastructure config written"
+          if [ -f "$INFRA_CONFIG" ]; then
+            echo "✅ Using committed infra config"
+          else
+            mkdir -p config
+            echo '${{ vars.INFRA_OUTPUTS_JSON }}' > "$INFRA_CONFIG"
+            echo "✅ Infrastructure config written from repository variable"
+          fi
 
       - name: Deploy
         env:
@@ -104,7 +109,7 @@ jobs:
       - name: Get Application URL
         id: get-url
         run: |
-          URL=$(echo '${{ vars.INFRA_OUTPUTS_JSON }}' | jq -r '.application_url.value // .application_url')
+          URL=$(jq -r '.application_url.value // .application_url' config/infra-outputs.json)
           echo "url=$URL" >> $GITHUB_OUTPUT
           echo "🌐 Application URL: $URL"
 
