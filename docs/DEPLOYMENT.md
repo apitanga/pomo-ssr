@@ -9,7 +9,7 @@ This document explains the deployment workflow for pomo-ssr using Terraform Clou
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                     GitHub Repository                        │
-│                     apitanga/pomo-ssr                        │
+│                     pomo-studio/pomo-ssr                        │
 └──────────────────────────┬──────────────────────────────────┘
                            │
               ┌────────────┴────────────┐
@@ -118,7 +118,7 @@ git push origin main  # GitHub Actions handles deploy
 - Working Directory: `infra/`
 - Trigger Patterns: `["infra/**/*.tf", "infra/**/*.tfvars"]`
 - Auto-apply: `false` (requires manual approval)
-- VCS: `apitanga/pomo-ssr` (GitHub App)
+- VCS: `pomo-studio/pomo-ssr` (GitHub App)
 - Branch: `main`
 
 **Authentication**: OIDC dynamic credentials (no static AWS keys!)
@@ -189,7 +189,7 @@ git push origin main  # GitHub Actions handles deploy
 **Check**:
 - AWS_ROLE_ARN secret exists and is correct
 - INFRA_OUTPUTS_JSON variable exists and is valid JSON
-- OIDC trust policy allows `apitanga/pomo-ssr` repo
+- OIDC trust policy allows `pomo-studio/pomo-ssr` repo
 - Lambda function names match outputs
 
 ### Sync workflow fails
@@ -345,8 +345,8 @@ This project uses **OIDC dynamic credentials** throughout:
 ## Related Documentation
 
 - [README.md](../README.md) - Project overview
-- [pomo repo](https://github.com/apitanga/pomo) - Core infrastructure
-- [serverless-ssr-module](https://github.com/apitanga/serverless-ssr-module) - Infrastructure module
+- [pomo repo](https://github.com/pomo-studio/pomo) - Core infrastructure
+- [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) - Infrastructure module
 
 ---
 

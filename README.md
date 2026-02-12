@@ -69,7 +69,7 @@ Shared:
 - ACM certificates (from pomo repo)
 ```
 
-**Infrastructure managed by**: [serverless-ssr-module](https://github.com/apitanga/serverless-ssr-module) v2.2.3
+**Infrastructure managed by**: [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) v2.2.3
 
 ---
 
@@ -175,7 +175,7 @@ cd .. && ./scripts/deploy.sh
 
 ```hcl
 module "ssr" {
-  source = "github.com/apitanga/serverless-ssr-module?ref=v2.2.3"
+  source = "github.com/pomo-studio/serverless-ssr-module?ref=v2.2.3"
 
   project_name    = "pomo-ssr"
   domain_name     = "pomo.dev"
@@ -188,7 +188,7 @@ module "ssr" {
 
 ### Domain Setup
 
-The **ssr.pomo.dev** subdomain is managed by the [pomo](https://github.com/apitanga/pomo) repository:
+The **ssr.pomo.dev** subdomain is managed by the [pomo](https://github.com/pomo-studio/pomo) repository:
 - Route53 hosted zone for pomo.dev
 - ACM certificates (us-east-1 for CloudFront)
 - OIDC provider for GitHub Actions
@@ -237,7 +237,7 @@ Estimated monthly cost: **~$2/month**
 | S3 | $0.10 |
 | Data transfer | $0.50 |
 
-**Note**: Route53 zone and ACM certs are in the [pomo](https://github.com/apitanga/pomo) repo (~$0.50/month).
+**Note**: Route53 zone and ACM certs are in the [pomo](https://github.com/pomo-studio/pomo) repo (~$0.50/month).
 
 ---
 
@@ -254,7 +254,7 @@ This repo is a living template — fork it to start a new SSR project:
 4. **GitHub secrets** — set `AWS_ROLE_ARN` and `TF_API_TOKEN` on the new repo
 5. **pomo repo** — add a GitHub Actions OIDC role for the new repo in `oidc.tf`
 
-See [pomo/docs/NEW-SITE-CHECKLIST.md](https://github.com/apitanga/pomo/blob/main/docs/NEW-SITE-CHECKLIST.md) for the full step-by-step.
+See [pomo/docs/NEW-SITE-CHECKLIST.md](https://github.com/pomo-studio/pomo/blob/main/docs/NEW-SITE-CHECKLIST.md) for the full step-by-step.
 
 ---
 
@@ -262,9 +262,9 @@ See [pomo/docs/NEW-SITE-CHECKLIST.md](https://github.com/apitanga/pomo/blob/main
 
 | Repository | Purpose | Relationship |
 |------------|---------|--------------|
-| [pomo](https://github.com/apitanga/pomo) | Core DNS/ACM infrastructure | Creates `pomo.dev` zone + certs + OIDC |
-| [serverless-ssr-module](https://github.com/apitanga/serverless-ssr-module) | Terraform module | Consumed by `infra/` |
-| [pomo-dev](https://github.com/apitanga/pomo-dev) | Production website | Sister project using same pattern |
+| [pomo](https://github.com/pomo-studio/pomo) | Core DNS/ACM infrastructure | Creates `pomo.dev` zone + certs + OIDC |
+| [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) | Terraform module | Consumed by `infra/` |
+| [pomo-dev](https://github.com/pomo-studio/pomo-dev) | Production website | Sister project using same pattern |
 
 ---
 
