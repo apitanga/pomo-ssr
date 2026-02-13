@@ -346,7 +346,7 @@ This project uses **OIDC dynamic credentials** throughout:
 
 - [README.md](../README.md) - Project overview
 - [pomo repo](https://github.com/pomo-studio/pomo) - Core infrastructure
-- [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) - Infrastructure module
+- [terraform-aws-serverless-ssr](https://github.com/pomo-studio/terraform-aws-serverless-ssr) - Infrastructure module
 
 ---
 

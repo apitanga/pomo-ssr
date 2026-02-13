@@ -46,7 +46,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   echo "❌ Infrastructure config not found: $CONFIG_FILE"
   echo ""
   echo "Setup required:"
-  echo "  1. Deploy infrastructure from serverless-ssr-module"
+  echo "  1. Deploy infrastructure from terraform-aws-serverless-ssr"
   echo "  2. Run: terraform output -json > $CONFIG_FILE"
   exit 1
 fi

@@ -1,6 +1,6 @@
 # Infrastructure Setup
 
-Before deploying this application, you need to provision the AWS infrastructure using the [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module).
+Before deploying this application, you need to provision the AWS infrastructure using the [terraform-aws-serverless-ssr](https://github.com/pomo-studio/terraform-aws-serverless-ssr).
 
 ## Quick Start
 
@@ -35,7 +35,7 @@ provider "aws" {
 }
 
 module "ssr" {
-  source = "github.com/pomo-studio/serverless-ssr-module"
+  source = "github.com/pomo-studio/terraform-aws-serverless-ssr"
 
   providers = {
     aws.primary = aws.primary
@@ -98,8 +98,8 @@ The module includes pre-built examples:
 
 ```bash
 # Clone module
-git clone https://github.com/pomo-studio/serverless-ssr-module.git
-cd serverless-ssr-module/examples/basic
+git clone https://github.com/pomo-studio/terraform-aws-serverless-ssr.git
+cd terraform-aws-serverless-ssr/examples/basic
 
 # Create terraform.tfvars
 cat > terraform.tfvars << 'EOF'
@@ -184,9 +184,9 @@ After setup, you'll have two directories:
 ## Module Documentation
 
 For full module documentation, see:
-- [serverless-ssr-module README](https://github.com/pomo-studio/serverless-ssr-module#readme)
-- [Basic Example](https://github.com/pomo-studio/serverless-ssr-module/tree/main/examples/basic)
-- [Complete Example](https://github.com/pomo-studio/serverless-ssr-module/tree/main/examples/complete)
+- [terraform-aws-serverless-ssr README](https://github.com/pomo-studio/terraform-aws-serverless-ssr#readme)
+- [Basic Example](https://github.com/pomo-studio/terraform-aws-serverless-ssr/tree/main/examples/basic)
+- [Complete Example](https://github.com/pomo-studio/terraform-aws-serverless-ssr/tree/main/examples/complete)
 
 ---
 

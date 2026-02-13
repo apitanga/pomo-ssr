@@ -267,4 +267,4 @@ git checkout main
 ## Related
 
 - [Infrastructure Setup](infrastructure-setup.md) - Deploy/modify infrastructure
-- [Module README](https://github.com/pomo-studio/serverless-ssr-module#readme) - Infrastructure module docs
+- [Module README](https://github.com/pomo-studio/terraform-aws-serverless-ssr#readme) - Infrastructure module docs

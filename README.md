@@ -1,6 +1,6 @@
 # Pomo SSR
 
-Demo site for **serverless-ssr-module** - showcasing server-side rendering on AWS Lambda with multi-region failover.
+Demo site for **terraform-aws-serverless-ssr** — showcasing server-side rendering on AWS Lambda with multi-region failover.
 
 **Live Demo**: [ssr.pomo.dev](https://ssr.pomo.dev)
 
@@ -11,7 +11,7 @@ Demo site for **serverless-ssr-module** - showcasing server-side rendering on AW
 ```
 pomo-ssr/                       # Monorepo
 ├── infra/                      # Terraform infrastructure
-│   ├── main.tf                 # Uses serverless-ssr-module v2.2.3
+│   ├── main.tf                 # Uses terraform-aws-serverless-ssr v2.2.4
 │   ├── outputs.tf              # Exports app_config
 │   ├── terraform.auto.tfvars   # Configuration
 │   └── versions.tf             # Terraform Cloud backend
@@ -69,7 +69,7 @@ Shared:
 - ACM certificates (from pomo repo)
 ```
 
-**Infrastructure managed by**: [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) v2.2.3
+**Infrastructure managed by**: [terraform-aws-serverless-ssr](https://github.com/pomo-studio/terraform-aws-serverless-ssr) v2.2.4
 
 ---
 
@@ -175,7 +175,7 @@ cd .. && ./scripts/deploy.sh
 
 ```hcl
 module "ssr" {
-  source = "github.com/pomo-studio/serverless-ssr-module?ref=v2.2.3"
+  source = "github.com/pomo-studio/terraform-aws-serverless-ssr?ref=v2.2.4"
 
   project_name    = "pomo-ssr"
   domain_name     = "pomo.dev"
@@ -263,7 +263,7 @@ See [pomo/docs/NEW-SITE-CHECKLIST.md](https://github.com/pomo-studio/pomo/blob/m
 | Repository | Purpose | Relationship |
 |------------|---------|--------------|
 | [pomo](https://github.com/pomo-studio/pomo) | Core DNS/ACM infrastructure | Creates `pomo.dev` zone + certs + OIDC |
-| [serverless-ssr-module](https://github.com/pomo-studio/serverless-ssr-module) | Terraform module | Consumed by `infra/` |
+| [terraform-aws-serverless-ssr](https://github.com/pomo-studio/terraform-aws-serverless-ssr) | Terraform module | Consumed by `infra/` |
 | [pomo-dev](https://github.com/pomo-studio/pomo-dev) | Production website | Sister project using same pattern |
 
 ---

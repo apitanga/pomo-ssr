@@ -4,7 +4,7 @@
       <slot />
     </main>
     <footer class="footer">
-      <p>serverless-ssr-pattern | Multi-region Serverless Architecture | {{ new Date().getFullYear() }}</p>
+      <p>terraform-aws-serverless-ssr | Multi-region Serverless Architecture | {{ new Date().getFullYear() }}</p>
     </footer>
   </div>
 </template>
